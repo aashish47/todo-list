@@ -1,17 +1,26 @@
-import AddTodo from "@/components/addTodo";
-import Heading from "@/components/heading";
-import TodoList from "@/components/todoList";
+import AddTodoForm from "@/app/components/addTodoForm";
+import Heading from "@/app/components/heading";
+import Todo from "@/app/components/todo";
+import { fetchTodos } from "@/app/lib/actions";
 
-const Home = () => {
+const Home = async () => {
+    const todos = await fetchTodos();
+
     return (
-        <div className="min-h-screen flex justify-center">
-            <div className="w-full sm:w-3/4 md:w-2/4 h-full p-2 flex flex-col gap-2">
-                <Heading title="todo list" />
-                <AddTodo />
-                <div className="h-4" />
-                <TodoList />
-            </div>
-        </div>
+        <>
+            <Heading title="todo list" />
+            <AddTodoForm />
+            <div className="h-4" />
+            {todos && (
+                <ul>
+                    {todos.map((todo) => (
+                        <li key={todo.id}>
+                            <Todo {...todo} />
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </>
     );
 };
 
