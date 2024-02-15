@@ -1,4 +1,4 @@
-import { DeleteButton, EditButton } from "@/app/components/buttons";
+import { DeleteButton, EditButton } from "@/components/buttons";
 import { Todo } from "@prisma/client";
 
 const Todo = ({ id, todo }: Todo) => {

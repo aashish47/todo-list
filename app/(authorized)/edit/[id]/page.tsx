@@ -1,6 +1,6 @@
-import Heading from "@/app/components/heading";
-import UpdateTodoForm from "@/app/components/updateTodoForm";
-import { fetchTodo, fetchTodos } from "@/app/lib/actions";
+import Heading from "@/components/heading";
+import UpdateTodoForm from "@/components/updateTodoForm";
+import { fetchTodo, fetchTodos } from "@/lib/actions";
 
 export async function generateStaticParams() {
     const todos = await fetchTodos();

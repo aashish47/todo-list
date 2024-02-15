@@ -1,4 +1,4 @@
-import { updateTodo } from "@/app/lib/actions";
+import { updateTodo } from "@/lib/actions";
 import { Todo } from "@prisma/client";
 
 const UpdateTodoForm = ({ id, todo }: Todo) => {

@@ -1,4 +1,4 @@
-import { createTodo } from "@/app/lib/actions";
+import { createTodo } from "@/lib/actions";
 
 const AddTodoForm = () => {
     return (
