@@ -11,7 +11,7 @@ const AuthUi = () => (
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
         providers={["google"]}
-        redirectTo="http://localhost:3000/auth/callback"
+        redirectTo={`${process.env.NEXT_PUBLIC_REDIRECT_URL}/auth/callback/`}
         theme="dark"
     />
 );
