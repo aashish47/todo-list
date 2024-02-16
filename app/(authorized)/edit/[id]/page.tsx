@@ -1,12 +1,17 @@
 import Heading from "@/components/heading";
 import UpdateTodoForm from "@/components/updateTodoForm";
-import { fetchTodo, fetchTodos } from "@/lib/actions";
+import { fetchTodo } from "@/lib/actions";
+import prisma from "@/lib/prisma";
 
 export async function generateStaticParams() {
-    const todos = await fetchTodos();
-    return todos.map((todo) => ({
-        id: todo.id.toString(),
-    }));
+    try {
+        const todos = await prisma.todo.findMany();
+        return todos.map((todo) => ({
+            id: todo.id.toString(),
+        }));
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 const Home = async ({ params }: { params: { id: string } }) => {
