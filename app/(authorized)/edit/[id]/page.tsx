@@ -15,10 +15,7 @@ const Home = async ({ params }: { params: { id: string } }) => {
         todo && (
             <>
                 <Heading title="update todo" />
-                <UpdateTodoForm
-                    id={todo.id}
-                    todo={todo.todo}
-                />
+                <UpdateTodoForm {...todo} />
             </>
         )
     );
