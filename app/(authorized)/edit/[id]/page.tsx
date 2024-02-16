@@ -4,14 +4,10 @@ import { fetchTodo } from "@/lib/actions";
 import prisma from "@/lib/prisma";
 
 export async function generateStaticParams() {
-    try {
-        const todos = await prisma.todo.findMany();
-        return todos.map((todo) => ({
-            id: todo.id.toString(),
-        }));
-    } catch (err) {
-        console.log(err);
-    }
+    const todos = await prisma.todo.findMany();
+    return todos.map((todo) => ({
+        id: todo.id.toString(),
+    }));
 }
 
 const Home = async ({ params }: { params: { id: string } }) => {
