@@ -7,12 +7,19 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const createTodo = async (formData: FormData) => {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    const user = await supabase.auth.getUser();
+    const userId = user.data.user?.id;
+    if (!userId) {
+        throw new Error("No UserId");
+    }
     const todo = formData.get("todo") as string;
     try {
-        await prisma.todo.create({ data: { todo } });
+        await prisma.todo.create({ data: { todo, userId } });
         revalidatePath("/");
     } catch (err: any) {
-        throw new Error("Error creating todo", err);
+        throw new Error(`Error creating todo ${err}`);
     }
 };
 

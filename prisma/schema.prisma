@@ -9,6 +9,7 @@ generator client {
 }
 
 model Todo {
-  id   Int    @id @default(autoincrement())
-  todo String
+  id     Int    @id @default(autoincrement())
+  userId String
+  todo   String
 }
