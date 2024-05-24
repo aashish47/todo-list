@@ -1,7 +1,7 @@
+import AuthUi from "@/components/authUi";
 import Heading from "@/components/heading";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const Home = async () => {
@@ -11,13 +11,10 @@ const Home = async () => {
     if (data?.user) {
         redirect("/home");
     }
-
     return (
         <>
-            <Link href={"/login"}>
-                <button className="text-white p-2 bg-violet-500 rounded ">Login</button>
-            </Link>
-            <Heading title="join today" />
+            <Heading title="sign in" />
+            <AuthUi />;
         </>
     );
 };

@@ -1,5 +1,5 @@
 import { DeleteButton, EditButton } from "@/components/buttons";
-import { Todo } from "@prisma/client";
+import type { Todo } from "@prisma/client";
 
 const Todo = ({ id, todo }: Todo) => {
     return (
