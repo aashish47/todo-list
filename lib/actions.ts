@@ -15,7 +15,7 @@ export const createTodo = async (formData: FormData) => {
         throw new Error("No UserId");
     }
     try {
-        const todo = formData.get("todo") as string;
+        const todo = (formData.get("todo") as string).trim().toLowerCase();
         await prisma.todo.create({ data: { todo, userId } });
         revalidatePath("/");
     } catch (err: any) {
@@ -52,7 +52,22 @@ export const fetchTodos = async () => {
         throw new Error("No UserId");
     }
     try {
-        return await prisma.todo.findMany();
+        return await prisma.todo.findMany({ orderBy: { todo: "asc" } });
+    } catch (err) {
+        throw new Error(`Error fetching todos ${err}`);
+    }
+};
+
+export const fetchTodosByAlpha = async (alpha: string) => {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    const user = await supabase.auth.getUser();
+    const userId = user.data.user?.id;
+    if (!userId) {
+        throw new Error("No UserId");
+    }
+    try {
+        return await prisma.todo.findMany({ orderBy: { todo: "asc" }, where: { todo: { startsWith: alpha } } });
     } catch (err) {
         throw new Error(`Error fetching todos ${err}`);
     }

@@ -1,16 +1,10 @@
-import { logout } from "@/lib/actions";
+import Navbar from "@/components/Navbar";
 
-export default function AuthorizedLayout({
-    children, // will be a page or nested layout
-}: {
-    children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <div>
-            <form action={logout}>
-                <button className="p-2 text-white bg-violet-500 rounded ">Logout</button>
-            </form>
-
+            <Navbar />
+            <div className="h-6" />
             {children}
         </div>
     );

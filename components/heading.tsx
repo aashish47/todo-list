@@ -3,7 +3,7 @@ interface HeadingProps {
 }
 
 const Heading = ({ title }: HeadingProps) => {
-    return <div className="capitalize text-white text-center text-3xl m-4">{title}</div>;
+    return <div className="capitalize text-white text-center text-3xl">{title}</div>;
 };
 
 export default Heading;

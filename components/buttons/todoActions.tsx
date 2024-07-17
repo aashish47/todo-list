@@ -2,10 +2,12 @@ import { deleteTodo } from "@/lib/actions";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
+const style = "w-6 h-6 hover:scale-125 hover:transition";
+
 export const EditButton = ({ id }: { id: number }) => {
     return (
         <Link href={`/edit/${id}`}>
-            <PencilIcon className="w-6 h-6 hover:scale-125 hover:transition" />
+            <PencilIcon className={style} />
         </Link>
     );
 };
@@ -19,7 +21,7 @@ export const DeleteButton = ({ id }: { id: number }) => {
                 value={id}
             />
             <button className="align-top ">
-                <TrashIcon className="w-6 h-6 hover:scale-125 hover:transition" />
+                <TrashIcon className={style} />
             </button>
         </form>
     );

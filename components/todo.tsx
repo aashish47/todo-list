@@ -1,9 +1,9 @@
-import { DeleteButton, EditButton } from "@/components/buttons";
+import { DeleteButton, EditButton } from "@/components/buttons/todoActions";
 import type { Todo } from "@prisma/client";
 
 const Todo = ({ id, todo }: Todo) => {
     return (
-        <div className="bg-emerald-500 rounded p-2 text-white flex justify-between my-2">
+        <div className="bg-cyan-500 ring ring-cyan-600 rounded p-2 text-cyan-100 flex justify-between mb-3">
             {todo}
             <div className="flex gap-2 ">
                 <EditButton id={id} />

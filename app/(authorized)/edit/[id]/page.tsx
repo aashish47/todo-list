@@ -1,6 +1,6 @@
-import Heading from "@/components/heading";
-import UpdateTodoForm from "@/components/updateTodoForm";
-import { fetchTodo } from "@/lib/actions";
+import Form from "@/components/Form";
+import Heading from "@/components/Heading";
+import { fetchTodo, updateTodo } from "@/lib/actions";
 import prisma from "@/lib/prisma";
 
 export async function generateStaticParams() {
@@ -11,13 +11,19 @@ export async function generateStaticParams() {
 }
 
 const Home = async ({ params }: { params: { id: string } }) => {
-    const todo = await fetchTodo(Number(params.id));
+    const id = Number(params.id);
+    const todo = await fetchTodo(id);
+    const updateTodoWithId = updateTodo.bind(null, id);
     return (
         todo && (
-            <>
-                <Heading title="update todo" />
-                <UpdateTodoForm {...todo} />
-            </>
+            <div className="flex flex-col gap-6">
+                <Heading title="update word" />
+                <Form
+                    action={updateTodoWithId}
+                    buttonType="update"
+                    inputDefault={todo.todo}
+                />
+            </div>
         )
     );
 };
