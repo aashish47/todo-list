@@ -2,7 +2,7 @@ import { logout } from "@/lib/actions";
 import { HomeIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-const style = "p-2 text-purple-100 bg-purple-500 ring ring-purple-600 rounded hover:bg-purple-400 hover:transition  active:bg-purple-600 capitalize";
+const style = "p-2 text-slate-100 bg-slate-500 ring ring-slate-600 rounded hover:bg-slate-400 hover:transition  active:bg-slate-600 capitalize";
 export const HomeButton = () => {
     return (
         <Link

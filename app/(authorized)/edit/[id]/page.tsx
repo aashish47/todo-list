@@ -1,5 +1,4 @@
 import Form from "@/components/Form";
-import Heading from "@/components/Heading";
 import { fetchTodo, updateTodo } from "@/lib/actions";
 import prisma from "@/lib/prisma";
 
@@ -16,14 +15,11 @@ const Home = async ({ params }: { params: { id: string } }) => {
     const updateTodoWithId = updateTodo.bind(null, id);
     return (
         todo && (
-            <div className="flex flex-col gap-6">
-                <Heading title="update word" />
-                <Form
-                    action={updateTodoWithId}
-                    buttonType="update"
-                    inputDefault={todo.todo}
-                />
-            </div>
+            <Form
+                action={updateTodoWithId}
+                buttonType="update"
+                inputDefault={todo.todo}
+            />
         )
     );
 };

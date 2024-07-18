@@ -3,12 +3,10 @@
 import prisma from "@/lib/prisma";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const createTodo = async (formData: FormData) => {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
     if (!userId) {
@@ -24,8 +22,7 @@ export const createTodo = async (formData: FormData) => {
 };
 
 export const deleteTodo = async (formData: FormData) => {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
     if (!userId) {
@@ -44,8 +41,7 @@ export const deleteTodo = async (formData: FormData) => {
 };
 
 export const fetchTodos = async () => {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
     if (!userId) {
@@ -59,23 +55,21 @@ export const fetchTodos = async () => {
 };
 
 export const fetchTodosByAlpha = async (alpha: string) => {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
     if (!userId) {
         throw new Error("No UserId");
     }
     try {
-        return await prisma.todo.findMany({ orderBy: { todo: "asc" }, where: { todo: { startsWith: alpha } } });
+        return await prisma.todo.findMany({ orderBy: { todo: "asc" }, where: { todo: { startsWith: alpha.toLowerCase() } } });
     } catch (err) {
         throw new Error(`Error fetching todos ${err}`);
     }
 };
 
 export const fetchTodo = async (id: number) => {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
     if (!userId) {
@@ -90,8 +84,7 @@ export const fetchTodo = async (id: number) => {
 };
 
 export const updateTodo = async (id: number, formData: FormData) => {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
     if (!userId) {
@@ -108,8 +101,7 @@ export const updateTodo = async (id: number, formData: FormData) => {
 };
 
 export const logout = async () => {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient();
     const { error } = await supabase.auth.signOut();
 
     if (error) {
