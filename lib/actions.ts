@@ -21,7 +21,7 @@ export const createTodo = async (formData: FormData) => {
     }
 };
 
-export const deleteTodo = async (formData: FormData) => {
+export const deleteTodo = async (id: number) => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -29,7 +29,6 @@ export const deleteTodo = async (formData: FormData) => {
         throw new Error("No UserId");
     }
     try {
-        const id = Number(formData.get("id"));
         if (!id) {
             throw new Error("id invalid");
         }
@@ -97,7 +96,6 @@ export const updateTodo = async (id: number, formData: FormData) => {
     } catch (err) {
         throw new Error(`Error updating todo ${err}`);
     }
-    redirect("/");
 };
 
 export const logout = async () => {

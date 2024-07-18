@@ -9,4 +9,43 @@
     ::-webkit-scrollbar-thumb {
         @apply bg-neutral-500;
     }
+    h1 {
+        @apply text-2xl;
+    }
+    h2 {
+        @apply text-xl;
+    }
+    h3 {
+        @apply text-lg;
+    }
+    h4 {
+        @apply text-base;
+    }
+    h5 {
+        @apply text-sm;
+    }
+    h6 {
+        @apply text-xs;
+    }
+}
+
+@layer utilities {
+    .btn-teal {
+        @apply p-2 rounded font-medium capitalize ring ring-teal-600 bg-teal-500 text-teal-100 hover:bg-teal-400 active:bg-teal-600 hover:transition;
+    }
+    .btn-fuchsia {
+        @apply p-2 rounded font-medium capitalize ring ring-fuchsia-600 bg-fuchsia-500 text-fuchsia-100 hover:bg-fuchsia-400 active:bg-fuchsia-600 hover:transition;
+    }
+    .btn-gray {
+        @apply p-2 rounded font-medium capitalize ring ring-gray-600 bg-gray-500 text-gray-100 hover:bg-gray-400 active:bg-gray-600 hover:transition;
+    }
+    .btn-purple {
+        @apply p-2 rounded font-medium capitalize ring ring-purple-600 bg-purple-500 text-purple-100 hover:bg-purple-400 active:bg-purple-600 hover:transition;
+    }
+    .btn-rose {
+        @apply p-2 rounded font-medium capitalize ring ring-rose-600 bg-rose-500 text-rose-100 hover:bg-rose-400 active:bg-rose-600 hover:transition;
+    }
+    .btn-white {
+        @apply p-2 rounded font-medium capitalize ring ring-neutral-300 bg-neutral-200 text-neutral-600 hover:bg-neutral-100 active:bg-neutral-300 hover:transition;
+    }
 }

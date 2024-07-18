@@ -1,13 +1,16 @@
+"use client";
+import Confirm from "@/components/Confirm";
+import Modal from "@/components/Modal";
 import { logout } from "@/lib/actions";
 import { HomeIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useState } from "react";
 
-const style = "p-2 text-slate-100 bg-slate-500 ring ring-slate-600 rounded hover:bg-slate-400 hover:transition  active:bg-slate-600 capitalize";
 export const HomeButton = () => {
     return (
         <Link
             href="/home"
-            className={style}
+            className="btn-gray"
         >
             <HomeIcon className="w-6 h-6" />
         </Link>
@@ -15,12 +18,25 @@ export const HomeButton = () => {
 };
 
 export const LogoutButton = () => {
+    const [open, setOpen] = useState(false);
     return (
-        <form
-            action={logout}
-            className="flex justify-end"
-        >
-            <button className={style}>logout</button>
-        </form>
+        <>
+            <button
+                className="btn-gray"
+                onClick={() => setOpen(true)}
+            >
+                logout
+            </button>
+            {open && (
+                <Modal>
+                    <Confirm
+                        type="logout"
+                        description="You can always log back in at any time."
+                        action={logout}
+                        setOpen={setOpen}
+                    />
+                </Modal>
+            )}
+        </>
     );
 };

@@ -6,7 +6,7 @@ const Input = ({ defaultValue }: { defaultValue: string }) => {
             placeholder="Word..."
             type="text"
             name="todo"
-            className="focus:outline focus:outline-2 focus:outline-teal-600 h-12 w-full rounded p-2 caret-teal-400"
+            className="focus:outline focus:outline-2 focus:outline-teal-600 h-12 w-full rounded p-2 caret-teal-400  text-black"
         />
     );
 };
