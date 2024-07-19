@@ -15,7 +15,7 @@ const Snackbar = ({ state }: { state: { date: Date | null; message: string } }) 
             return () => clearTimeout(timer);
         }
     }, [state]);
-    return showSnackbar && <div className="absolute top-2 left-1/2 -translate-x-1/2 bar-purple">{state.message}</div>;
+    return showSnackbar && <div className="absolute top-2 left-1/2 -translate-x-1/2 bar-purple text-nowrap">{state.message}</div>;
 };
 
 export default Snackbar;
