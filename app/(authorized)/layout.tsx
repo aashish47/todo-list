@@ -13,6 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     action={createTodo}
                     buttonType="add"
                     inputDefault=""
+                    color="btn-teal"
                 />
                 <Alphabets />
                 {children}

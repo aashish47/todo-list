@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export const createTodo = async (formData: FormData) => {
+export const createTodo = async (prevState: any, formData: FormData) => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -16,12 +16,13 @@ export const createTodo = async (formData: FormData) => {
         const todo = (formData.get("todo") as string).trim().toLowerCase();
         await prisma.todo.create({ data: { todo, userId } });
         revalidatePath("/");
+        return { message: `Success! ${todo} added`, date: Date.now() };
     } catch (err: any) {
         throw new Error(`Error creating todo ${err}`);
     }
 };
 
-export const deleteTodo = async (id: number) => {
+export const deleteTodo = async (id: number, prevState: any) => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -34,6 +35,7 @@ export const deleteTodo = async (id: number) => {
         }
         await prisma.todo.delete({ where: { id, userId } });
         revalidatePath("/");
+        return { message: `Deleted!`, date: Date.now() };
     } catch (err) {
         throw new Error(`Error deleting todo ${err}`);
     }
@@ -82,7 +84,7 @@ export const fetchTodo = async (id: number) => {
     }
 };
 
-export const updateTodo = async (id: number, formData: FormData) => {
+export const updateTodo = async (id: number, prevState: any, formData: FormData) => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -93,6 +95,7 @@ export const updateTodo = async (id: number, formData: FormData) => {
         const todo = formData.get("todo") as string;
         await prisma.todo.update({ where: { id, userId }, data: { todo } });
         revalidatePath("/");
+        return { message: `Updated!`, date: Date.now() };
     } catch (err) {
         throw new Error(`Error updating todo ${err}`);
     }

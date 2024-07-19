@@ -28,6 +28,7 @@ export const EditButton = ({ id, todo }: { id: number; todo: string }) => {
                         action={updateTodoWithId}
                         buttonType="update"
                         inputDefault={todo}
+                        color="btn-teal"
                     />
                     <button
                         className="btn-white w-full mt-3"
@@ -41,7 +42,7 @@ export const EditButton = ({ id, todo }: { id: number; todo: string }) => {
     );
 };
 
-export const DeleteButton = ({ id }: { id: number }) => {
+export const DeleteButton = ({ id, todo }: { id: number; todo: String }) => {
     const [open, setOpen] = useState(false);
     const deleteTodoWithId = deleteTodo.bind(null, id);
     return (
@@ -58,7 +59,7 @@ export const DeleteButton = ({ id }: { id: number }) => {
                 <Modal>
                     <Confirm
                         type={"delete"}
-                        description={"Are you sure you want to delete word? This action cannot be undone."}
+                        description={`Are you sure you want to delete ${todo}? This action cannot be undone.`}
                         action={deleteTodoWithId}
                         setOpen={setOpen}
                     />
