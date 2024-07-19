@@ -1,4 +1,5 @@
-import { HomeButton, LogoutButton } from "@/components/buttons/navbarButtons";
+import HomeButton from "@/components/buttons/HomeButton";
+import LogoutButton from "@/components/buttons/LogoutButton";
 
 const Navbar = () => {
     return (

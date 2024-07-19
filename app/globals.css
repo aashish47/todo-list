@@ -49,12 +49,12 @@
         @apply p-2 rounded font-medium capitalize ring ring-neutral-300 bg-neutral-200 text-neutral-600 hover:bg-neutral-100 active:bg-neutral-300 hover:transition;
     }
     .btn-disabled {
-        @apply p-2 rounded font-medium capitalize ring ring-neutral-400 bg-neutral-300 text-neutral-500;
+        @apply p-2 rounded font-medium capitalize ring ring-neutral-400 bg-neutral-300 text-neutral-600;
     }
     .bar-cyan {
-        @apply p-2 rounded font-light capitalize bg-cyan-500 ring ring-cyan-600 text-cyan-100;
+        @apply p-2 rounded capitalize bg-cyan-500 ring ring-cyan-600 text-cyan-100;
     }
-    .bar-fuchsia {
-        @apply p-2 rounded font-medium capitalize bg-fuchsia-500 ring ring-fuchsia-600 text-fuchsia-100;
+    .bar-purple {
+        @apply p-2 rounded capitalize bg-purple-500 ring ring-purple-600 text-purple-100;
     }
 }

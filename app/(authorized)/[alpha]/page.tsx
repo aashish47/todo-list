@@ -1,6 +1,6 @@
 import NoWord from "@/components/NoWord";
-import Todos from "@/components/Todos";
-import { fetchTodosByAlpha } from "@/lib/actions";
+import Words from "@/components/Words";
+import { fetchVocabularyByAlpha } from "@/lib/actions";
 import alphabets from "@/utils/alphabets";
 import { notFound } from "next/navigation";
 
@@ -16,9 +16,9 @@ const Home = async ({ params }: { params: { alpha: string } }) => {
     if (!regex.test(alpha)) {
         notFound();
     }
-    const todos = await fetchTodosByAlpha(alpha);
+    const vocabulary = await fetchVocabularyByAlpha(alpha);
 
-    return todos.length > 0 ? <Todos todos={todos} /> : <NoWord />;
+    return vocabulary.length > 0 ? <Words vocabulary={vocabulary} /> : <NoWord />;
 };
 
 export default Home;

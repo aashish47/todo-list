@@ -1,10 +1,10 @@
 import NoWord from "@/components/NoWord";
-import Todos from "@/components/Todos";
-import { fetchTodos } from "@/lib/actions";
+import Words from "@/components/Words";
+import { fetchVocabulary } from "@/lib/actions";
 
 const Home = async () => {
-    const todos = await fetchTodos();
-    return todos.length > 0 ? <Todos todos={todos} /> : <NoWord />;
+    const vocabulary = await fetchVocabulary();
+    return vocabulary.length > 0 ? <Words vocabulary={vocabulary} /> : <NoWord />;
 };
 
 export default Home;

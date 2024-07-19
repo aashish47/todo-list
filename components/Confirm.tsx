@@ -10,9 +10,9 @@ interface ConfirmProps {
 
 const Confirm: React.FC<ConfirmProps> = ({ type, description, action, setOpen }) => {
     return (
-        <div className="text-slate-100 text-center">
-            <p className="text-lg font-medium capitalize ">{type}?</p>
-            <p className="font-extralight normal-case">{description}</p>
+        <div className="text-slate-300">
+            <h3 className="font-medium capitalize ">{type}?</h3>
+            <h4 className="normal-case">{description}</h4>
             <div className="flex flex-col items-stretch gap-3 mt-4">
                 <form action={action}>
                     <FormButton

@@ -5,7 +5,7 @@ const Input = ({ defaultValue }: { defaultValue: string }) => {
             defaultValue={defaultValue}
             placeholder="Word..."
             type="text"
-            name="todo"
+            name="word"
             className="focus:outline focus:outline-2 focus:outline-teal-600 h-12 w-full rounded p-2 caret-teal-400  text-black"
         />
     );

@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export const createTodo = async (prevState: any, formData: FormData) => {
+export const addWord = async (prevState: any, formData: FormData) => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -13,16 +13,16 @@ export const createTodo = async (prevState: any, formData: FormData) => {
         throw new Error("No UserId");
     }
     try {
-        const todo = (formData.get("todo") as string).trim().toLowerCase();
-        await prisma.todo.create({ data: { todo, userId } });
+        const word = (formData.get("word") as string).trim().toLowerCase();
+        await prisma.vocabulary.create({ data: { word, userId } });
         revalidatePath("/");
-        return { message: `Success! ${todo} added`, date: Date.now() };
+        return { message: `Success! ${word} added`, date: Date.now() };
     } catch (err: any) {
-        throw new Error(`Error creating todo ${err}`);
+        throw new Error(`Error adding word ${err}`);
     }
 };
 
-export const deleteTodo = async (id: number, prevState: any) => {
+export const deleteWord = async (id: number, prevState: any) => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -33,15 +33,15 @@ export const deleteTodo = async (id: number, prevState: any) => {
         if (!id) {
             throw new Error("id invalid");
         }
-        await prisma.todo.delete({ where: { id, userId } });
+        await prisma.vocabulary.delete({ where: { id, userId } });
         revalidatePath("/");
         return { message: `Deleted!`, date: Date.now() };
     } catch (err) {
-        throw new Error(`Error deleting todo ${err}`);
+        throw new Error(`Error deleting word ${err}`);
     }
 };
 
-export const fetchTodos = async () => {
+export const fetchVocabulary = async () => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -49,13 +49,13 @@ export const fetchTodos = async () => {
         throw new Error("No UserId");
     }
     try {
-        return await prisma.todo.findMany({ orderBy: { todo: "asc" } });
+        return await prisma.vocabulary.findMany({ orderBy: { word: "asc" } });
     } catch (err) {
-        throw new Error(`Error fetching todos ${err}`);
+        throw new Error(`Error fetching vocabulary ${err}`);
     }
 };
 
-export const fetchTodosByAlpha = async (alpha: string) => {
+export const fetchVocabularyByAlpha = async (alpha: string) => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -63,13 +63,13 @@ export const fetchTodosByAlpha = async (alpha: string) => {
         throw new Error("No UserId");
     }
     try {
-        return await prisma.todo.findMany({ orderBy: { todo: "asc" }, where: { todo: { startsWith: alpha.toLowerCase() } } });
+        return await prisma.vocabulary.findMany({ orderBy: { word: "asc" }, where: { word: { startsWith: alpha.toLowerCase() } } });
     } catch (err) {
-        throw new Error(`Error fetching todos ${err}`);
+        throw new Error(`Error fetching vocabulary ${err}`);
     }
 };
 
-export const fetchTodo = async (id: number) => {
+export const fetchWord = async (id: number) => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -77,14 +77,14 @@ export const fetchTodo = async (id: number) => {
         throw new Error("No UserId");
     }
     try {
-        return await prisma.todo.findUnique({ where: { id, userId } });
+        return await prisma.vocabulary.findUnique({ where: { id, userId } });
     } catch (err) {
         console.log(err);
-        throw new Error(`Error fetching todo ${err}`);
+        throw new Error(`Error fetching word ${err}`);
     }
 };
 
-export const updateTodo = async (id: number, prevState: any, formData: FormData) => {
+export const updateWord = async (id: number, prevState: any, formData: FormData) => {
     const supabase = createClient();
     const user = await supabase.auth.getUser();
     const userId = user.data.user?.id;
@@ -92,12 +92,12 @@ export const updateTodo = async (id: number, prevState: any, formData: FormData)
         throw new Error("No UserId");
     }
     try {
-        const todo = formData.get("todo") as string;
-        await prisma.todo.update({ where: { id, userId }, data: { todo } });
+        const word = formData.get("word") as string;
+        await prisma.vocabulary.update({ where: { id, userId }, data: { word } });
         revalidatePath("/");
         return { message: `Updated!`, date: Date.now() };
     } catch (err) {
-        throw new Error(`Error updating todo ${err}`);
+        throw new Error(`Error updating word ${err}`);
     }
 };
 
