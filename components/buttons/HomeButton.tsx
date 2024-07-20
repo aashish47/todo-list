@@ -5,6 +5,7 @@ const HomeButton = () => {
     return (
         <Link
             href="/home"
+            prefetch={false}
             className="btn-gray"
         >
             <HomeIcon className="w-6 h-6" />
